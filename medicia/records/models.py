@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.expressions import OrderBy
+from django.contrib.auth.models import User
 
 class Employee(models.Model):
     ROLES = (
@@ -16,12 +16,13 @@ class Employee(models.Model):
     phone = models.CharField(max_length=16)
     role = models.CharField(max_length=100, choices=ROLES, default="doctor")
     employed = models.DateField(auto_now_add=True)
+    active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ("_id",)
 
     def __str__(self):
-        return f"<{self._id} - {self.first_name} {self.role}>"
+        return f"{self._id} - {self.first_name} {self.last_name}"
 
 class Patient(models.Model):
     GENOTYPES = (
@@ -48,12 +49,12 @@ class Patient(models.Model):
     genotype = models.CharField(max_length=2, choices=GENOTYPES)
     bg = models.CharField(max_length=3, choices=BLOOD_GROUPS)
     gender = models.CharField(max_length=40)
-    allergies = models.CharField(max_length=250)
+    allergies = models.CharField(max_length=250, null=True)
 
     class Meta:
         ordering =  ("_id",)
 
     def __str__(self):
-        return f"<{self._id} - {self.first_name}>"
+        return f"{self._id} - {self.first_name}"
 
 
