@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content%}
+<div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Health is Wealth</h1>
+      <p>Book consultations, get fast and reliable healthcare services at the click of a button</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Consultation</h2>
+        <p>Get fast consultations services from world-class doctors</p>
+      </div>
+      <div class="col-md-4">
+        <h2>Cost Effective</h2>
+        <p>At Medicia, health comes first. A human's life is priceless</p>
+      </div>
+      <div class="col-md-4">
+        <h2>Request a consultation</h2>
+        <form method="POST" action="/register">
+          <div class="form-group row">
+            <input class="form-control mr-sm-2" type="email" placeholder="Email address" name="email">
+          </div>
+          <div class="form-group row">
+            <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password">
+          </div>
+          <div class="form-group row">
+            <input class="form-control mr-sm-2" type="password" name="password2" placeholder="Confirm Password">
+          </div>
+          <div class="form-group row">
+            <button class="btn btn-primary" type="submit">Register</button>
+          </div>
+      </form>
+      </div>
+    </div>
+
+    <hr>
+
+  </div>
+{% endblock %}
