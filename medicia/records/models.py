@@ -1,11 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from account.models import User
 from django.core.validators import RegexValidator
-
-ROLES = (
-    ("doctor", "Doctor"),
-    ("hr", "HR")
-)
 
 GENOTYPES = (
     ("AA", "AA"),
@@ -22,18 +17,6 @@ BLOOD_GROUPS = (
     ("O+", "O-positive"), ("O-", "O-negative"),
     ("AB+", "AB-positive"), ("AB-", "AB-negative")
 )
-
-class User(AbstractUser):
-    type = models.CharField(choices=ROLES, max_length=12)
-
-    def is_doctor(self):
-        return self.type=="doctor"
-
-    def is_HR(self):
-        return self.type=="hr"
-
-    class Meta:
-        ordering=("-id",)
 
 class Patient(models.Model):
     id = models.AutoField(primary_key=True)
