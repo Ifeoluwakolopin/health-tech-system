@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Create Appointment{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Create an Appointment</h1>
+    <p>Use the form below to create an appointment</p>
+    <form method="POST">
+        {{ app_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Create Appointment"></p>
+    </form>
+</div>
+{% endblock %}
