@@ -1,7 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render
 from .models import Patient, Employee, Appointment, Prescription
 from .forms import AppointmentCreateForm, PrescriptionCreateForm
 
+
+@login_required
+def dashboard(request):
+    return render(request, "account/dashboard.html")
 
 def index(request):
     return render(request, "records/index.html")

@@ -1,6 +1,6 @@
 from django.db import models
-from account.models import User
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
 
 GENOTYPES = (
     ("AA", "AA"),
@@ -16,6 +16,11 @@ BLOOD_GROUPS = (
     ("B+", "B-positive"), ("B-", "B-negative"),
     ("O+", "O-positive"), ("O-", "O-negative"),
     ("AB+", "AB-positive"), ("AB-", "AB-negative")
+)
+
+ROLES = (
+    ("doctor", "Doctor"),
+    ("hr", "HR")
 )
 
 class Patient(models.Model):
@@ -41,6 +46,7 @@ class Patient(models.Model):
 
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.CharField(choices=ROLES, max_length=12)
     phone_validator = RegexValidator(regex="^\+\d{9,15}$", message="Phone number should be in format +1234567890 (up to 15 digits)")
     phone = models.CharField(validators=[phone_validator], max_length=17, blank=True)
     gender = models.CharField(max_length=20, blank=True)
@@ -53,7 +59,13 @@ class Employee(models.Model):
         ordering = ("-id",)
 
     def __str__(self):
-        return self.user.first_name
+        return f"{self.user.first_name}: {self.role}"
+    
+    def is_doctor(self):
+        return self.role=="doctor"
+
+    def is_HR(self):
+        return self.role=="hr"
 
 
 class Appointment(models.Model):

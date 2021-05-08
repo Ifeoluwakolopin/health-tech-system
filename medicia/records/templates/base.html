@@ -12,7 +12,7 @@
 <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{% url "records:index" %}">MEDICIA</a>
+        <a class="navbar-brand" href="{% url "index" %}">MEDICIA</a>
         {% block navbar-brand %}
         {% if request.user.is_authenticated %}
           <li class="navbar-item active">
